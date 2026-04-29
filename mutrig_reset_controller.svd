@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device schemaVersion="1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
+  <vendor>Mu3e</vendor>
+  <vendorID>MU3E</vendorID>
+  <name>MU3E_MUTRIG_RESET_CONTROLLER</name>
+  <series>MU3E_FPGA_IP</series>
+  <version>1.0.8</version>
+  <description>MuTRiG reset controller management aperture. The current RTL exposes the reconfig_mgmt Avalon-MM port as the 64-word PLL-reconfiguration window; in the active source the PLL reconfiguration sub-IP is disabled, so this SVD intentionally models the window as raw implementation-defined words.</description>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <access>read-write</access>
+  <resetValue>0x00000000</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+  <peripherals>
+    <peripheral>
+      <name>MUTRIG_RESET_RECONFIG_MGMT</name>
+      <description>Relative 64-word raw management aperture.</description>
+      <groupName>MU3E_DATA_PATH</groupName>
+      <baseAddress>0x0</baseAddress>
+      <addressBlock><offset>0x0</offset><size>0x100</size><usage>registers</usage></addressBlock>
+      <registers>
+        <register>
+          <dim>64</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <dimIndex>0-63</dimIndex>
+          <name>RAW_WORD%s</name>
+          <description>Raw reconfiguration word. Readback is implementation-defined in this build.</description>
+          <addressOffset>0x00</addressOffset>
+          <access>read-write</access>
+          <fields><field><name>value</name><description>Raw 32-bit management value.</description><bitOffset>0</bitOffset><bitWidth>32</bitWidth><access>read-write</access></field></fields>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>
