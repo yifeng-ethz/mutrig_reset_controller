@@ -20,7 +20,7 @@ package require -exact qsys 16.1
 # 
 set_module_property DESCRIPTION "Issue reset to MuTRiG during run sync. Allows fine phase shift w.r.t a reference clock."
 set_module_property NAME mutrig_reset_controller
-set_module_property VERSION 1.0.8
+set_module_property VERSION 1.1.0
 set_module_property INTERNAL false
 set_module_property OPAQUE_ADDRESS_MAP true
 set_module_property GROUP "Mu3e Data Plane/Modules"
@@ -92,7 +92,6 @@ set_interface_property runcontrol SVD_ADDRESS_GROUP ""
 
 add_interface_port runcontrol asi_runcontrol_data data Input 9
 add_interface_port runcontrol asi_runcontrol_valid valid Input 1
-add_interface_port runcontrol asi_runcontrol_ready ready Output 1
 
 
 # 

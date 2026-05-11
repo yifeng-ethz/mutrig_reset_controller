@@ -3,6 +3,8 @@
 -- =======================================
 -- Revision: 1.0 (file created)
 --		Date: Jul 16, 2024
+-- Revision: 1.1 (drop runcontrol ready output to match rc-network readyless contract)
+--		Date: May 11, 2026
 -- =========
 -- Description:	[MuTRiG Reset Controller] 
 -- 		Reset the MuTRiGs by asserting the reset for during run state "SYNC".
@@ -37,9 +39,10 @@ entity mutrig_reset_controller is
 	);
 	port (
 		-- streaming run control interface (lvds_dpa_clk)
+		-- rc-network is readyless (USE_READY=0 broadcast); no ready output on
+		-- this entity boundary. The original constant '1' driver is dropped.
 		asi_runcontrol_data				: in  std_logic_vector(8 downto 0);
 		asi_runcontrol_valid			: in  std_logic;
-		asi_runcontrol_ready			: out std_logic;
 		
 		-- mutrig reset conduit (pll_dps_clk)
 		o_mutrig_reset					: out std_logic_vector(RESET_LANE-1 downto 0);
@@ -164,12 +167,10 @@ begin
 					when others =>
 						run_state_cmd		<= ERROR;
 				end case;
-			else 
+			else
 				run_state_cmd		<= run_state_cmd;
 			end if;
-			-- ready
-			-- TODO: hook up with main state machine
-			asi_runcontrol_ready		<= '1';
+			-- rc-network is readyless in v1.1.0 onwards; no ready driver here.
 		end if;
 	end process;
 	
