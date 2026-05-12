@@ -125,7 +125,8 @@ begin
 	proc_wire_clk_and_rst : process (all)
 	begin
 		-- clock
-		o_pll_dps_clk		<= pclk;
+		pclk				<= i_si_direct_clk;
+		o_pll_dps_clk		<= i_si_direct_clk;
 		sclk				<= i_si_direct_clk;
 		dclk				<= i_lvds_dpa_clk;
 		-- reset
@@ -233,4 +234,4 @@ begin
 
 
 
-end architecture; 
+end architecture;
